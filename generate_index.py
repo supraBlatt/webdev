@@ -1,22 +1,32 @@
 import os
+import re
 
-# Root directory where the exercises are stored
+# Root directory where the exercises and capstone projects are stored
 ROOT_DIR = "."
 OUTPUT_FILE = "index.html"
 
-def get_modules(root_dir):
-    modules = {}
-    for item in os.listdir(root_dir):
-        # Check if the item is a directory and starts with a number
-        if os.path.isdir(item) and item[0].isdigit():
-            module_number = item.split('.')[0]  # Get the module number (e.g., "2" from "2.1")
-            module_name = f"Module {module_number}"
-            if module_name not in modules:
-                modules[module_name] = []
-            modules[module_name].append(item)
-    return modules
+# Regular expression to identify Capstone Project folders
+CAPSTONE_PATTERN = re.compile(r"Capstone Project \d+")
 
-def generate_index_html(modules, output_file):
+def get_modules_and_capstones(root_dir):
+    modules = {}
+    capstones = []
+    for item in os.listdir(root_dir):
+        # Check if the item is a directory
+        if os.path.isdir(item):
+            # Check if it's a Capstone Project
+            if CAPSTONE_PATTERN.match(item):
+                capstones.append(item)
+            # Otherwise, group by module number
+            elif item[0].isdigit():
+                module_number = item.split('.')[0]  # Get the module number (e.g., "2" from "2.1")
+                module_name = f"Module {module_number}"
+                if module_name not in modules:
+                    modules[module_name] = []
+                modules[module_name].append(item)
+    return modules, capstones
+
+def generate_index_html(modules, capstones, output_file):
     with open(output_file, "w") as f:
         # Start HTML structure
         f.write("""<!DOCTYPE html>
@@ -44,6 +54,16 @@ def generate_index_html(modules, output_file):
             f.write("        </ul>\n")
             f.write("      </section>\n")
 
+        # Add capstone projects
+        if capstones:
+            f.write("      <section class=\"module\">\n")
+            f.write("        <h2>Capstone Projects</h2>\n")
+            f.write("        <ul>\n")
+            for project in sorted(capstones):
+                f.write(f"          <li><a href=\"{project}/index.html\">{project}</a></li>\n")
+            f.write("        </ul>\n")
+            f.write("      </section>\n")
+
         # Close HTML structure
         f.write("""    </div>
   </main>
@@ -55,10 +75,11 @@ def generate_index_html(modules, output_file):
 """)
 
 def main():
-    # Get modules and exercises
-    modules = get_modules(ROOT_DIR)
+    # Get modules and capstone projects
+    modules, capstones = get_modules_and_capstones(ROOT_DIR)
+
     # Generate the HTML file
-    generate_index_html(modules, OUTPUT_FILE)
+    generate_index_html(modules, capstones, OUTPUT_FILE)
     print(f"{OUTPUT_FILE} has been successfully generated!")
 
 if __name__ == "__main__":
