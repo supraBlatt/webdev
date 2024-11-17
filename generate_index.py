@@ -1,5 +1,5 @@
 import os
-# ChatGPT generated 
+
 # Root directory where the exercises are stored
 ROOT_DIR = "."
 OUTPUT_FILE = "index.html"
@@ -25,21 +25,31 @@ def generate_index_html(modules, output_file):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercises</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Modules</h1>
-  <div id="modules-container">
+  <header>
+    <h1>Exercises</h1>
+  </header>
+  <main>
+    <div id="modules-container">
 """)
         # Add modules and exercises
         for module_name, exercises in sorted(modules.items()):
-            f.write(f"    <h2>{module_name}</h2>\n")
-            f.write("    <ol>\n")
+            f.write(f"      <section class=\"module\">\n")
+            f.write(f"        <h2>{module_name}</h2>\n")
+            f.write("        <ul>\n")
             for exercise in sorted(exercises):
-                f.write(f"      <li><a href=\"{exercise}/index.html\">{exercise}</a></li>\n")
-            f.write("    </ol>\n")
+                f.write(f"          <li><a href=\"{exercise}/index.html\">{exercise}</a></li>\n")
+            f.write("        </ul>\n")
+            f.write("      </section>\n")
 
         # Close HTML structure
-        f.write("""  </div>
+        f.write("""    </div>
+  </main>
+  <footer>
+    <p>© 2024 Exercise Tracker. All rights reserved.</p>
+  </footer>
 </body>
 </html>
 """)

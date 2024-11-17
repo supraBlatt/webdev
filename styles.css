@@ -1,0 +1,94 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Apply the Google Font */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+header {
+  background: #4CAF50;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem; /* Reduced font size */
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+main {
+  padding: 1.5rem; /* Slightly smaller padding */
+}
+
+#modules-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.module {
+  background: white;
+  margin-bottom: 1.5rem; /* Reduced spacing between modules */
+  padding: 1rem; /* Reduced padding */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.module:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.module h2 {
+  font-size: 1.4rem; /* Reduced font size for module titles */
+  font-weight: 600;
+  color: #4CAF50;
+  margin-bottom: 0.8rem;
+}
+
+.module ul { /* Changed from <ol> to <ul> */
+  margin: 0;
+  padding-left: 0; /* Remove default padding */
+  list-style-type: none; /* Remove bullet points */
+}
+
+.module ul li {
+  margin: 0.5rem 0; /* Reduced margin between list items */
+}
+
+.module ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 400;
+  font-size: 1rem; /* Slightly smaller font for exercise links */
+  display: inline-block;
+  padding: 0.2rem 0.4rem; /* Reduced padding for links */
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.module ul li a:hover {
+  color: white;
+  background-color: #4CAF50;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 0.8rem 0; /* Reduced footer padding */
+  background: #333;
+  color: white;
+  font-size: 0.8rem; /* Reduced footer font size */
+  margin-top: 1.5rem;
+  font-weight: 300;
+}
